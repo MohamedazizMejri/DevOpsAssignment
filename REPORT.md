@@ -227,6 +227,70 @@ After testing, the pipeline builds a Docker image named `iris-ml-app:latest` fro
 
 This the final `Dockerfile` used to containerise the Iris ML app
 
+
+
+![](assets/20251117_155701_task5_q3_2.png)
+
+
+
+I staged all the relevant project files using:
+
+`git add REPORT.md README.md .github/workflows/ci.yml Dockerfile src tests .flake8`
+
+Then, I created a clear final commit with the message:
+
+`git commit -m "DevOps assignment V2"`
+
+Finally, I pushed the commit to the remote repository `DevOpsAssignment` on GitHub. This action ensures that the CI workflow, Dockerfile, test suite, linter configuration, and the report are all available in the online repository.
+
+
+![](assets/20251117_160433_task5_q3_3.png)
+
+
+
+The **GitHub Actions** page shows a successful execution of the CI workflow for the commit **"DevOps assignment: final version (tests, CI, Docker, report)"** . The `build-test` job completed with all steps passing, including repository checkout, Python environment setup, dependency installation, `flake8` linting, `pytest` execution, Docker image build, and artifact uploads. This verifies that the complete CI pipeline is functioning correctly
+
+
+## Task 6: Containerise the app
+
+
+![](assets/20251117_162644_task5_q3_1.png)
+
+
+
+
+![](assets/20251117_161339_task6_q1.png)
+
+
+
+
+![](assets/20251117_162101_task6_q1_3.png)
+
+Before building the Docker image, I made sure that **Docker Desktop** was running. In the project root, I then built the Docker image for the Iris ML application using: `docker build -t iris-ml-app:latest .` The terminal output shows Docker pulling the `python:3.10-slim` base image, copying the project files, installing the dependencies from `requirements.txt`, and exporting the layers to create the image tagged `iris-ml-app:latest`. This confirms that the **Dockerfile** builds successfully and produces a working image.
+
+
+
+![](assets/20251117_161634_task6_q1_2.png)
+
+I launched a container from the `iris-ml-app:latest` image using: `docker run --rm iris-ml-app:latest` Inside the container, the `CMD ["python", "src/train.py"]` instruction defined in the Dockerfile executes the training script. The script loads the Iris dataset, displays dataset statistics, trains the logistic regression model, evaluates it (achieving an accuracy of **0.967** ), and saves the trained model along with the evaluation plots. This demonstrates that the containerized application runs correctly and replicates the same training workflow as on the host system.
+
+
+
+![](assets/20251117_162307_task6_q2.png)
+
+
+
+
+The **Docker Desktop** interface displays the list of local images, including `iris-ml-app:latest` created for this assignment (size: 970.23 MB). Its presence alongside other images such as `ml-app` and `iris-classifier` confirms that the build was successfully stored locally and is available to be run or pushed to a container registry if desired.
+
+
+<pre class="overflow-visible!" data-start="271" data-end="319"><div class="contain-inline-size rounded-2xl relative bg-token-sidebar-surface-primary"><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-bg-elevated-secondary text-token-text-secondary flex items-center gap-4 rounded-sm px-2 font-sans text-xs"></div></div></div><div class="overflow-y-auto p-4" dir="ltr"></div></div></pre>
+
+<pre class="overflow-visible!" data-start="290" data-end="338"><div class="contain-inline-size rounded-2xl relative bg-token-sidebar-surface-primary"><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-bg-elevated-secondary text-token-text-secondary flex items-center gap-4 rounded-sm px-2 font-sans text-xs"></div></div></div><div class="overflow-y-auto p-4" dir="ltr"></div></div></pre>
+
+
+<pre class="overflow-visible!" data-start="139" data-end="232"><div class="contain-inline-size rounded-2xl relative bg-token-sidebar-surface-primary"><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-bg-elevated-secondary text-token-text-secondary flex items-center gap-4 rounded-sm px-2 font-sans text-xs"></div></div></div><div class="overflow-y-auto p-4" dir="ltr"></div></div></pre>
+
 <pre class="overflow-visible!" data-start="130" data-end="161"><div class="contain-inline-size rounded-2xl relative bg-token-sidebar-surface-primary"><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-bg-elevated-secondary text-token-text-secondary flex items-center gap-4 rounded-sm px-2 font-sans text-xs"></div></div></div><div class="overflow-y-auto p-4" dir="ltr"></div></div></pre>
 
 <pre class="overflow-visible!" data-start="141" data-end="186"><div class="contain-inline-size rounded-2xl relative bg-token-sidebar-surface-primary"><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-bg-elevated-secondary text-token-text-secondary flex items-center gap-4 rounded-sm px-2 font-sans text-xs"></div></div></div><div class="overflow-y-auto p-4" dir="ltr"></div></div></pre>
